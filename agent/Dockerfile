@@ -18,11 +18,11 @@ COPY ["ssh", "/root/.ssh"]
 RUN pip install awscli~=1.16 --upgrade
 
 RUN cd /tmp && \
-    curl --location https://github.com/keithduncan/travis-pipeline/releases/download/v0.4/travis-pipeline_0.4.0_amd64.deb >travis-pipeline_0.4.0_amd64.deb && \
-    dpkg -i travis-pipeline_0.4.0_amd64.deb && \
-    rm travis-pipeline_0.4.0_amd64.deb
+    curl --location https://github.com/keithduncan/travis-pipeline/releases/download/v0.5/travis-pipeline_0.5.0_amd64.deb >travis-pipeline_0.5.0_amd64.deb && \
+    dpkg -i travis-pipeline_0.5.0_amd64.deb && \
+    rm travis-pipeline_0.5.0_amd64.deb
 
-LABEL buildkite.metadata=awscli,awscli:version=1.16,travis-pipeline,travis-pipeline:version=0.4
+LABEL buildkite.metadata=awscli,awscli:version=1.16,travis-pipeline,travis-pipeline:version=0.5
 
 ENTRYPOINT ["/usr/bin/buildkite-agent"]
 CMD ["start"]
