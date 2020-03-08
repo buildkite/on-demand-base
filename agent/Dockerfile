@@ -5,7 +5,7 @@ RUN apt-get update && \
       curl \
       git \
       hub \
-      python-pip &&
+      python-pip && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ["ssh", "/root/.ssh"]
