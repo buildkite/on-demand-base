@@ -4,6 +4,7 @@ RUN apt-get update && \
     apt-get install -y \
       curl \
       git \
+      hub \
       python-pip
 
 COPY ["ssh", "/root/.ssh"]
