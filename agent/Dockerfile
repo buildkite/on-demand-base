@@ -20,4 +20,5 @@ RUN mkdir -p /tmp/travis && \
     dpkg -i travis.deb && \
     rm travis.deb
 
-ENV BUILDKITE_ABOUT_IMAGE "buildkite-agent\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub"
+ARG COMMIT
+ENV BUILDKITE_ABOUT_IMAGE "keithduncan/buildkite-agent\ncommit: $COMMIT\n\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub"
