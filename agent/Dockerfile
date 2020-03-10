@@ -10,9 +10,14 @@ RUN apt-get update && \
 
 COPY ["ssh", "/root/.ssh"]
 
-RUN pip install awscli~=1.16 --upgrade
+ARG AWS_CLI=1.16
+RUN pip install awscli~="$AWS_CLI" --upgrade
 
-RUN cd /tmp && \
-    curl --location https://github.com/keithduncan/travis-pipeline/releases/download/v0.5/travis-pipeline_0.5.0_amd64.deb >travis-pipeline_0.5.0_amd64.deb && \
-    dpkg -i travis-pipeline_0.5.0_amd64.deb && \
-    rm travis-pipeline_0.5.0_amd64.deb
+ARG TRAVIS_PIPELINE=v0.5.0
+RUN mkdir -p /tmp/travis-pipeline && \
+	cd /tmp/travis-pipeline && \
+    curl --location "https://github.com/keithduncan/travis-pipeline/releases/download/${TRAVIS_PIPELINE}/travis-pipeline_${TRAVIS_PIPELINE}_amd64.deb" >travis-pipeline.deb && \
+    dpkg -i travis-pipeline.deb && \
+    rm travis-pipeline.deb
+
+ENV BUILDKITE_ABOUT_IMAGE "buildkite-agent\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub"
