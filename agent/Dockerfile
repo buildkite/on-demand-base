@@ -5,7 +5,8 @@ RUN apt-get update && \
       curl \
       git \
       hub \
-      python-pip && \
+      python-pip \
+      socat && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ["ssh", "/root/.ssh"]
@@ -21,4 +22,4 @@ RUN mkdir -p /tmp/travis && \
     rm travis.deb
 
 ARG COMMIT
-ENV BUILDKITE_ABOUT_IMAGE "keithduncan/buildkite-agent\ncommit: $COMMIT\n\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub"
+ENV BUILDKITE_ABOUT_IMAGE "keithduncan/buildkite-agent\ncommit: $COMMIT\n\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub\nsocat"
