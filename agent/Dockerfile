@@ -21,7 +21,8 @@ RUN mkdir -p /tmp/travis && \
     dpkg -i travis.deb && \
     rm travis.deb
 
-RUN curl --location "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" >/usr/bin/github-release
+RUN curl --location "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" >/usr/bin/github-release && \
+    chmod +x /usr/bin/github-release
 
 ARG COMMIT
 ENV BUILDKITE_ABOUT_IMAGE "repository: keithduncan/buildkite-agent\ncommit: $COMMIT\n\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub\nsocat\ngithub-release"
