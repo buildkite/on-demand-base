@@ -24,5 +24,11 @@ RUN mkdir -p /tmp/travis && \
 RUN curl --location "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" >/usr/bin/github-release && \
     chmod +x /usr/bin/github-release
 
+ENV DOCKER_VERSION=19.03.9
+RUN cd /tmp && \
+    curl -fsSL "https://download.docker.com/linux/static/stable/$(uname -m)/docker-${DOCKER_VERSION}.tgz" >docker.tgz && \
+    tar xzvf docker.tgz --strip 1 -C /usr/local/bin docker/docker && \
+    rm docker.tgz
+
 ARG COMMIT
 ENV BUILDKITE_ABOUT_IMAGE "repository: keithduncan/buildkite-agent\ncommit: $COMMIT\n\naws-cli: $AWS_CLI\ntravis-pipeline: $TRAVIS_PIPELINE\nhub\nsocat\ngithub-release"
